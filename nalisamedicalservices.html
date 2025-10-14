@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nalisa Medical Solutions</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* Base */
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+body { background-color:#007acc; color:white; transition:0.5s; }
+
+/* Header */
+header { display:flex; justify-content:space-between; align-items:center; padding:1rem 2rem; background:#0059b3; position:fixed; width:100%; z-index:100; box-shadow:0 4px 6px rgba(0,0,0,0.2);}
+nav ul { list-style:none; display:flex; gap:2rem; }
+nav ul li { position:relative; cursor:pointer; font-weight:bold; }
+nav ul li ul { display:none; position:absolute; top:30px; left:0; background:#004080; padding:0.5rem 1rem; border-radius:5px; }
+nav ul li:hover ul { display:block; }
+nav ul li ul li { padding:0.3rem 0; }
+
+/* Logo Section Fixed */
+.logo-section { display:flex; flex-direction:column; align-items:flex-end; color:white; position:fixed; top:1rem; right:2rem; z-index:101; }
+.logo-section img { width:60px; margin-bottom:0.3rem; }
+.logo-section span { font-size:1rem; font-weight:bold; }
+
+/* Search Bar */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: white;
+  padding: 0.3rem 0.7rem;
+  border-radius: 20px;
+  position: relative;
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  padding: 0.3rem 0.5rem;
+  border-radius: 20px;
+  width: 180px;
+  font-size: 0.9rem;
+}
+
+.search-bar i {
+  color: #0059b3;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* Responsive Search */
+@media (max-width: 768px) {
+  .search-bar input {
+    width: 120px;
+  }
+  nav ul {
+    gap: 1rem;
+  }
+}
+
+/* Hero Section */
+.hero { margin-top:100px; text-align:center; padding:4rem 2rem; background:linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('https://via.placeholder.com/1600x600?text=Hospital') no-repeat center/cover; color:white; }
+.hero h1 { font-size:3rem; margin-bottom:1rem; }
+.hero p { font-size:1.2rem; max-width:700px; margin:auto; }
+
+/* News Ticker */
+.news-ticker { background:#004080; padding:0.5rem 2rem; overflow:hidden; white-space: nowrap; font-weight:bold; position:fixed; top:60px; width:100%; color:white; }
+.news-ticker span { display:inline-block; padding-left:100%; animation: ticker 20s linear infinite; }
+@keyframes ticker { 0%{transform:translateX(0);} 100%{transform:translateX(-100%);} }
+
+/* Services Section */
+.services { padding:2rem; text-align:center; margin-top:200px; }
+.services h2 { margin-bottom:1.5rem; font-size:2rem; color:white; }
+.services h3 { margin-top:2rem; margin-bottom:1rem; color:white; }
+.grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap:1rem; }
+.grid-item { position:relative; cursor:pointer; border-radius:10px; overflow:hidden; transition:transform 0.3s; }
+.grid-item img { width:100%; height:150px; object-fit:cover; display:block; }
+.grid-item:hover { transform: scale(1.05); }
+.grid-item .service-name { position:absolute; bottom:0; left:0; right:0; background:rgba(0,51,102,0.7); padding:0.3rem; text-align:center; font-weight:bold; color:white; }
+.grid-item .service-short { position:absolute; top:0; left:0; right:0; background:rgba(0,51,102,0.7); padding:0.3rem; font-size:0.8rem; text-align:center; color:white; }
+
+/* Modal */
+.modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:200; }
+.modal-content { background:#004080; color:white; padding:2rem; border-radius:10px; max-width:600px; text-align:left; position:relative; }
+.modal-content h3 { margin-bottom:1rem; }
+.modal-content p { margin-bottom:1.5rem; }
+.close { position:absolute; top:10px; right:15px; cursor:pointer; font-size:1.5rem; color:white; }
+.book-btn { padding:0.5rem 1rem; background:#0059b3; color:white; border:none; border-radius:5px; cursor:pointer; text-decoration:none; }
+.book-btn:hover { background:#003366; }
+
+/* Location Section */
+.location-section { padding:2rem; text-align:center; margin-top:2rem; }
+.location-section iframe { width:100%; max-width:600px; height:300px; border:0; border-radius:10px; margin-bottom:1rem; }
+.external-links a { margin:0 1rem; color:#00bfff; font-weight:bold; text-decoration:none; }
+.external-links a:hover { text-decoration:underline; }
+
+/* Footer */
+footer { padding:1rem 2rem; background:#0059b3; display:flex; justify-content:space-between; flex-wrap:wrap; color:white; }
+.footer-left, .footer-right { display:flex; align-items:center; gap:1rem; }
+.socials a { color:white; font-size:1.2rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <ul>
+      <li>Human Resource Management
+        <ul>
+          <li>Employeement</li>
+          <li>Employees</li>
+        </ul>
+      </li>
+      <li>About</li>
+      <li>Policy</li>
+      <li>Projects</li>
+      <li>Services</li>
+    </ul>
+  </nav>
+
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search services..." />
+    <i class="fa fa-search"></i>
+  </div>
+</header>
+
+<!-- Logo Section -->
+<div class="logo-section">
+  <img src="logo.jpeg" alt="Logo">
+  <span>NALISA MEDICAL SOLUTIONS - TEMPLATE</span>
+</div>
+
+<!-- News Ticker -->
+<div class="news-ticker"><span>Latest Updates | MOH - National Health Guidelines | Who we are | Health Policies</span></div>
+
+
+<div class="hero">
+  <h1>Welcome to Nalisa Medical Services</h1>
+  <p>Providing specialized healthcare services with modern technology and compassionate care. Explore our services and book your appointments easily.</p>
+</div>
+
+<section class="services">
+  <h2>Our Specialized Services</h2>
+
+  <!-- Example grid for one category -->
+  <h3>General & Internal Medicine</h3>
+  <div class="grid">
+    <section class="services">
+  <h2>Our Specialized Services</h2>
+
+  <!-- General & Internal Medicine -->
+  <h3>General & Internal Medicine</h3>
+  <div class="grid">
+    <div class="grid-item" data-name="Cardiologist" data-desc="Heart, blood vessels, and cardiovascular system treatment.">
+      <img src="https://via.placeholder.com/150?text=Cardiologist" alt="">
+      <div class="service-name">Cardiologist</div>
+      <div class="service-short">Heart care</div>
+    </div>
+    <div class="grid-item" data-name="Endocrinologist" data-desc="Hormonal disorders such as diabetes and thyroid problems.">
+      <img src="https://via.placeholder.com/150?text=Endocrinologist" alt="">
+      <div class="service-name">Endocrinologist</div>
+      <div class="service-short">Hormones</div>
+    </div>
+    <div class="grid-item" data-name="Gastroenterologist" data-desc="Treatment of digestive system disorders, including stomach and intestines.">
+      <img src="https://via.placeholder.com/150?text=Gastroenterologist" alt="">
+      <div class="service-name">Gastroenterologist</div>
+      <div class="service-short">Digestive care</div>
+    </div>
+    <div class="grid-item" data-name="Nephrologist" data-desc="Kidney-related diseases and dialysis management.">
+      <img src="https://via.placeholder.com/150?text=Nephrologist" alt="">
+      <div class="service-name">Nephrologist</div>
+      <div class="service-short">Kidney care</div>
+    </div>
+    <div class="grid-item" data-name="Pulmonologist" data-desc="Lung and respiratory system disorders.">
+      <img src="https://via.placeholder.com/150?text=Pulmonologist" alt="">
+      <div class="service-name">Pulmonologist</div>
+      <div class="service-short">Lung care</div>
+    </div>
+    <div class="grid-item" data-name="Rheumatologist" data-desc="Musculoskeletal and autoimmune disorders.">
+      <img src="https://via.placeholder.com/150?text=Rheumatologist" alt="">
+      <div class="service-name">Rheumatologist</div>
+      <div class="service-short">Joints & autoimmune</div>
+    </div>
+  </div>
+
+  <!-- Surgery -->
+  <h3>Surgical Specialties</h3>
+  <div class="grid">
+    <div class="grid-item" data-name="General Surgeon" data-desc="Performing surgeries on abdominal organs, skin, and soft tissues.">
+      <img src="https://via.placeholder.com/150?text=General+Surgeon" alt="">
+      <div class="service-name">General Surgeon</div>
+      <div class="service-short">Surgery care</div>
+    </div>
+    <div class="grid-item" data-name="Neurosurgeon" data-desc="Surgical treatment of brain, spinal cord, and nerves.">
+      <img src="https://via.placeholder.com/150?text=Neurosurgeon" alt="">
+      <div class="service-name">Neurosurgeon</div>
+      <div class="service-short">Brain & spine</div>
+    </div>
+    <div class="grid-item" data-name="Orthopedic Surgeon" data-desc="Bone, joint, and musculoskeletal surgeries.">
+      <img src="https://via.placeholder.com/150?text=Orthopedic+Surgeon" alt="">
+      <div class="service-name">Orthopedic Surgeon</div>
+      <div class="service-short">Bone & joints</div>
+    </div>
+    <div class="grid-item" data-name="Plastic Surgeon" data-desc="Cosmetic and reconstructive surgeries.">
+      <img src="https://via.placeholder.com/150?text=Plastic+Surgeon" alt="">
+      <div class="service-name">Plastic Surgeon</div>
+      <div class="service-short">Reconstruction</div>
+    </div>
+    <div class="grid-item" data-name="Cardiothoracic Surgeon" data-desc="Surgery of the heart, lungs, and chest organs.">
+      <img src="https://via.placeholder.com/150?text=Cardiothoracic+Surgeon" alt="">
+      <div class="service-name">Cardiothoracic Surgeon</div>
+      <div class="service-short">Heart & chest</div>
+    </div>
+    <div class="grid-item" data-name="Urologist Surgeon" data-desc="Surgical management of urinary tract and male reproductive organs.">
+      <img src="https://via.placeholder.com/150?text=Urologist+Surgeon" alt="">
+      <div class="service-name">Urologist Surgeon</div>
+      <div class="service-short">Urinary care</div>
+    </div>
+  </div>
+
+  <!-- Pediatrics -->
+  <h3>Pediatric Care</h3>
+  <div class="grid">
+    <div class="grid-item" data-name="Pediatrician" data-desc="Comprehensive care for infants, children, and adolescents.">
+      <img src="https://via.placeholder.com/150?text=Pediatrician" alt="">
+      <div class="service-name">Pediatrician</div>
+      <div class="service-short">Children care</div>
+    </div>
+    <div class="grid-item" data-name="Neonatologist" data-desc="Care for newborns and premature infants.">
+      <img src="https://via.placeholder.com/150?text=Neonatologist" alt="">
+      <div class="service-name">Neonatologist</div>
+      <div class="service-short">Newborn care</div>
+    </div>
+    <div class="grid-item" data-name="Pediatric Surgeon" data-desc="Surgical procedures for children.">
+      <img src="https://via.placeholder.com/150?text=Pediatric+Surgeon" alt="">
+      <div class="service-name">Pediatric Surgeon</div>
+      <div class="service-short">Child surgery</div>
+    </div>
+    <div class="grid-item" data-name="Pediatric Cardiologist" data-desc="Heart care specialized for children.">
+      <img src="https://via.placeholder.com/150?text=Pediatric+Cardiologist" alt="">
+      <div class="service-name">Pediatric Cardiologist</div>
+      <div class="service-short">Child heart care</div>
+    </div>
+    <div class="grid-item" data-name="Pediatric Endocrinologist" data-desc="Hormonal issues in children including growth and diabetes.">
+      <img src="https://via.placeholder.com/150?text=Pediatric+Endocrinologist" alt="">
+      <div class="service-name">Pediatric Endocrinologist</div>
+      <div class="service-short">Child hormones</div>
+    </div>
+    <div class="grid-item" data-name="Pediatric Neurologist" data-desc="Neurological disorders in children.">
+      <img src="https://via.placeholder.com/150?text=Pediatric+Neurologist" alt="">
+      <div class="service-name">Pediatric Neurologist</div>
+      <div class="service-short">Child nerves</div>
+    </div>
+  </div>
+
+  <!-- Obstetrics & Gynecology -->
+  <h3>Obstetrics & Gynecology</h3>
+  <div class="grid">
+    <div class="grid-item" data-name="Obstetrician" data-desc="Pregnancy, childbirth, and postpartum care.">
+      <img src="https://via.placeholder.com/150?text=Obstetrician" alt="">
+      <div class="service-name">Obstetrician</div>
+      <div class="service-short">Pregnancy care</div>
+    </div>
+    <div class="grid-item" data-name="Gynecologist" data-desc="Female reproductive health including menstruation and fertility.">
+      <img src="https://via.placeholder.com/150?text=Gynecologist" alt="">
+      <div class="service-name">Gynecologist</div>
+      <div class="service-short">Female care</div>
+    </div>
+    <div class="grid-item" data-name="Fertility Specialist" data-desc="Assistance with conception and infertility treatments.">
+      <img src="https://via.placeholder.com/150?text=Fertility+Specialist" alt="">
+      <div class="service-name">Fertility Specialist</div>
+      <div class="service-short">Infertility care</div>
+    </div>
+    <div class="grid-item" data-name="Maternal-Fetal Medicine" data-desc="High-risk pregnancy management and care.">
+      <img src="https://via.placeholder.com/150?text=Maternal-Fetal+Medicine" alt="">
+      <div class="service-name">Maternal-Fetal Medicine</div>
+      <div class="service-short">High-risk pregnancy</div>
+    </div>
+    <div class="grid-item" data-name="Gynecologic Oncologist" data-desc="Cancer treatment of female reproductive organs.">
+      <img src="https://via.placeholder.com/150?text=Gynecologic+Oncologist" alt="">
+      <div class="service-name">Gynecologic Oncologist</div>
+      <div class="service-short">Female cancer care</div>
+    </div>
+    <div class="grid-item" data-name="Reproductive Endocrinologist" data-desc="Hormonal and reproductive issues in women.">
+      <img src="https://via.placeholder.com/150?text=Reproductive+Endocrinologist" alt="">
+      <div class="service-name">Reproductive Endocrinologist</div>
+      <div class="service-short">Hormonal care</div>
+    </div>
+  </div>
+
+  <!-- Add remaining categories similarly: Neurology, Oncology, Dermatology, Psychiatry, Ophthalmology, ENT, Dentistry, Radiology, Physiotherapy, Emergency, etc., until all 60+ services are included -->
+    <!-- Neurology -->
+  <h3>Neurology</h3>
+  <div class="grid">
+    <div class="grid-item" data-name="Neurologist" data-desc="Diagnosis and treatment of brain, spinal cord, and nervous system disorders.">
+      <img src="https://via.placeholder.com/150?text=Neurologist" alt="">
+      <div class="service-name">Neurologist</div>
+      <div class="service-short">Brain & nerves</div>
+    </div>
+    <div class="grid-item" data-name="Neurophysiologist" data-desc="Evaluation of nervous system function with diagnostic testing.">
+      <img src="https://via.placeholder.com/150?text=Neurophysiologist" alt="">
+      <div class="service-name">Neurophysiologist</div>
+      <div class="service-short">Nerve testing</div>
+    </div>
+    <div class="grid-item" data-name="Stroke Specialist" data-desc="Management and rehabilitation of stroke patients.">
+      <img src="https://via.placeholder.com/150?text=Stroke+Specialist" alt="">
+      <div class="service-name">Stroke Specialist</div>
+      <div class="service-short">Stroke care</div>
+    </div>
+    <div class="grid-item" data-name="Epileptologist" data-desc="Treatment of epilepsy and seizure disorders.">
+      <img src="https://via.placeholder.com/150?text=Epileptologist" alt="">
+      <div class="service-name">Epileptologist</div>
+      <div class="service-short">Seizure care</div>
+    </div>
+    <div class="grid-item" data-name="Neuro-Oncologist" data-desc="Diagnosis and treatment of brain tumors.">
+      <img src="https://via.placeholder.com/150?text=Neuro-Oncologist" alt="">
+      <div class="service-name">Neuro-Oncologist</div>
+      <div class="service-short">Brain cancer care</div>
+    </div>
+    <div class="grid-item" data-name="Pediatric Neurologist" data-desc="Neurological disorders in children.">
+      <img src="https://via.placeholder.com/150?text=Pediatric+Neurologist" alt="">
+      <div class="service-name">Pediatric Neurologist</div>
+      <div class="service-short">Child nerve care</div>
+    </div>
+  </div>
+
+  <!-- Oncology -->
+  <h3>Oncology</h3>
+  <div class="grid">
+    <div class="grid-item" data-name="Medical Oncologist" data-desc="Cancer treatment with medications including chemotherapy.">
+      <img src="https://via.placeholder.com/150?text=Medical+Oncologist" alt="">
+      <div class="service-name">Medical Oncologist</div>
+      <div class="service-short">Cancer meds</div>
+    </div>
+    <div class="grid-item" data-name="Radiation Oncologist" data-desc="Treatment of cancer using radiation therapy.">
+      <img src="https://via.placeholder.com/150?text=Radiation+Oncologist" alt="">
+      <div class="service-name">Radiation Oncologist</div>
+      <div class="service-short">Radiation therapy</div>
+    </div>
+    <div class="grid-item" data-name="Surgical Oncologist" data-desc="Surgical removal of cancerous tumors.">
+      <img src="https://via.placeholder.com/150?text=Surgical+Oncologist" alt="">
+      <div class="service-name">Surgical Oncologist</div>
+      <div class="service-short">Cancer surgery</div>
+    </div>
+    <div class="grid-item" data-name="Hematologist-Oncologist" data-desc="Treatment of blood cancers like leukemia and lymphoma.">
+      <img src="https://via.placeholder.com/150?text=Hematologist-Oncologist" alt="">
+      <div class="service-name">Hematologist-Oncologist</div>
+      <div class="service-short">Blood cancer care</div>
+    </div>
+    <div class="grid-item" data-name="Pediatric Oncologist" data-desc="Cancer treatment specialized for children.">
+      <img src="https://via.placeholder.com/150?text=Pediatric+Oncologist" alt="">
+      <div class="service-name">Pediatric Oncologist</div>
+      <div class="service-short">Child cancer care</div>
+    </div>
+    <div class="grid-item" data-name="Oncology Nurse" data-desc="Specialized nursing care for cancer patients.">
+      <img src="https://via.placeholder.com/150?text=Oncology+Nurse" alt="">
+      <div class="service-name">Oncology Nurse</div>
+      <div class="service-short">Cancer nursing</div>
+    </div>
+  </div>
+
+  <!-- Dermatology -->
+  <h3>Dermatology</h3>
+  <div class="grid">
+    <div class="grid-item" data-name="Dermatologist" data-desc="Treatment of skin, hair, and nail disorders.">
+      <img src="https://via.placeholder.com/150?text=Dermatologist" alt="">
+      <div class="service-name">Dermatologist</div>
+      <div class="service-short">Skin care</div>
+    </div>
+    <div class="grid-item" data-name="Cosmetic Dermatologist" data-desc="Aesthetic treatments including lasers, fillers, and skin rejuvenation.">
+      <img src="https://via.placeholder.com/150?text=Cosmetic+Dermatologist" alt="">
+      <div class="service-name">Cosmetic Dermatologist</div>
+      <div class="service-short">Aesthetic care</div>
+    </div>
+    <div class="grid-item" data-name="Pediatric Dermatologist" data-desc="Skin disorders in children.">
+      <img src="https://via.placeholder.com/150?text=Pediatric+Dermatologist" alt="">
+      <div class="service-name">Pediatric Dermatologist</div>
+      <div class="service-short">Child skin care</div>
+    </div>
+    <div class="grid-item" data-name="Dermatopathologist" data-desc="Diagnosis of skin diseases using laboratory testing.">
+      <img src="https://via.placeholder.com/150?text=Dermatopathologist" alt="">
+      <div class="service-name">Dermatopathologist</div>
+      <div class="service-short">Lab skin care</div>
+    </div>
+    <div class="grid-item" data-name="Mohs Surgeon" data-desc="Precise skin cancer removal surgery.">
+      <img src="https://via.placeholder.com/150?text=Mohs+Surgeon" alt="">
+      <div class="service-name">Mohs Surgeon</div>
+      <div class="service-short">Skin cancer surgery</div>
+    </div>
+    <div class="grid-item" data-name="Allergist-Dermatologist" data-desc="Skin allergies and related conditions.">
+      <img src="https://via.placeholder.com/150?text=Allergist-Dermatologist" alt="">
+      <div class="service-name">Allergist-Dermatologist</div>
+      <div class="service-short">Skin allergies</div>
+    </div>
+  </div>
+
+  <!-- Psychiatry -->
+  <h3>Psychiatry & Mental Health</h3>
+  <div class="grid">
+    <div class="grid-item" data-name="Psychiatrist" data-desc="Diagnosis and treatment of mental health disorders.">
+      <img src="https://via.placeholder.com/150?text=Psychiatrist" alt="">
+      <div class="service-name">Psychiatrist</div>
+      <div class="service-short">Mental health</div>
+    </div>
+    <div class="grid-item" data-name="Child Psychiatrist" data-desc="Mental health care for children and adolescents.">
+      <img src="https://via.placeholder.com/150?text=Child+Psychiatrist" alt="">
+      <div class="service-name">Child Psychiatrist</div>
+      <div class="service-short">Child mental care</div>
+    </div>
+    <div class="grid-item" data-name="Addiction Specialist" data-desc="Treatment for substance abuse and addictions.">
+      <img src="https://via.placeholder.com/150?text=Addiction+Specialist" alt="">
+      <div class="service-name">Addiction Specialist</div>
+      <div class="service-short">Substance care</div>
+    </div>
+    <div class="grid-item" data-name="Clinical Psychologist" data-desc="Therapeutic mental health support and counseling.">
+      <img src="https://via.placeholder.com/150?text=Clinical+Psychologist" alt="">
+      <div class="service-name">Clinical Psychologist</div>
+      <div class="service-short">Therapy</div>
+    </div>
+    <div class="grid-item" data-name="Neuropsychiatrist" data-desc="Intersection of neurological and psychiatric disorders.">
+      <img src="https://via.placeholder.com/150?text=Neuropsychiatrist" alt="">
+      <div class="service-name">Neuropsychiatrist</div>
+      <div class="service-short">Brain & mental care</div>
+    </div>
+    <div class="grid-item" data-name="Psychiatric Nurse" data-desc="Specialized nursing care for psychiatric patients.">
+      <img src="https://via.placeholder.com/150?text=Psychiatric+Nurse" alt="">
+      <div class="service-name">Psychiatric Nurse</div>
+      <div class="service-short">Mental nursing</div>
+    </div>
+  </div>
+
+  <!-- Ophthalmology -->
+  <h3>Ophthalmology & Eye Care</h3>
+  <div class="grid">
+    <div class="grid-item" data-name="Ophthalmologist" data-desc="Diagnosis and treatment of eye diseases.">
+      <img src="https://via.placeholder.com/150?text=Ophthalmologist" alt="">
+      <div class="service-name">Ophthalmologist</div>
+      <div class="service-short">Eye care</div>
+    </div>
+    <div class="grid-item" data-name="Optometrist" data-desc="Vision testing and corrective lenses.">
+      <img src="https://via.placeholder.com/150?text=Optometrist" alt="">
+      <div class="service-name">Optometrist</div>
+      <div class="service-short">Vision care</div>
+    </div>
+    <div class="grid-item" data-name="Pediatric Ophthalmologist" data-desc="Eye care for children.">
+      <img src="https://via.placeholder.com/150?text=Pediatric+Ophthalmologist" alt="">
+      <div class="service-name">Pediatric Ophthalmologist</div>
+      <div class="service-short">Child eyes</div>
+    </div>
+    <div class="grid-item" data-name="Retina Specialist" data-desc="Treatment of retinal diseases.">
+      <img src="https://via.placeholder.com/150?text=Retina+Specialist" alt="">
+      <div class="service-name">Retina Specialist</div>
+      <div class="service-short">Retina care</div>
+    </div>
+    <div class="grid-item" data-name="Glaucoma Specialist" data-desc="Diagnosis and treatment of glaucoma.">
+      <img src="https://via.placeholder.com/150?text=Glaucoma+Specialist" alt="">
+      <div class="service-name">Glaucoma Specialist</div>
+      <div class="service-short">Glaucoma care</div>
+    </div>
+    <div class="grid-item" data-name="Cornea Specialist" data-desc="Diseases and surgery of the cornea.">
+      <img src="https://via.placeholder.com/150?text=Cornea+Specialist" alt="">
+      <div class="service-name">Cornea Specialist</div>
+      <div class="service-short">Cornea care</div>
+    </div>
+  </div>
+<!-- ENT (Ear, Nose, Throat) -->
+<h3>ENT (Ear, Nose, Throat)</h3>
+<div class="grid">
+  <div class="grid-item" data-name="ENT Specialist" data-desc="Diagnosis and treatment of ear, nose, and throat disorders.">
+    <img src="https://via.placeholder.com/150?text=ENT+Specialist" alt="">
+    <div class="service-name">ENT Specialist</div>
+    <div class="service-short">Ear, nose, throat</div>
+  </div>
+  <div class="grid-item" data-name="Audiologist" data-desc="Hearing assessment and rehabilitation.">
+    <img src="https://via.placeholder.com/150?text=Audiologist" alt="">
+    <div class="service-name">Audiologist</div>
+    <div class="service-short">Hearing care</div>
+  </div>
+  <div class="grid-item" data-name="Speech Therapist" data-desc="Speech and language therapy for all ages.">
+    <img src="https://via.placeholder.com/150?text=Speech+Therapist" alt="">
+    <div class="service-name">Speech Therapist</div>
+    <div class="service-short">Speech care</div>
+  </div>
+  <div class="grid-item" data-name="Pediatric ENT" data-desc="ENT care specialized for children.">
+    <img src="https://via.placeholder.com/150?text=Pediatric+ENT" alt="">
+    <div class="service-name">Pediatric ENT</div>
+    <div class="service-short">Child ENT</div>
+  </div>
+  <div class="grid-item" data-name="Otologist" data-desc="Treatment of ear disorders and balance problems.">
+    <img src="https://via.placeholder.com/150?text=Otologist" alt="">
+    <div class="service-name">Otologist</div>
+    <div class="service-short">Ear care</div>
+  </div>
+  <div class="grid-item" data-name="Rhinologist" data-desc="Treatment of nose and sinus disorders.">
+    <img src="https://via.placeholder.com/150?text=Rhinologist" alt="">
+    <div class="service-name">Rhinologist</div>
+    <div class="service-short">Nose care</div>
+  </div>
+</div>
+
+<!-- Dentistry -->
+<h3>Dentistry</h3>
+<div class="grid">
+  <div class="grid-item" data-name="General Dentist" data-desc="Routine dental checkups, cleanings, and preventive care.">
+    <img src="https://via.placeholder.com/150?text=General+Dentist" alt="">
+    <div class="service-name">General Dentist</div>
+    <div class="service-short">Teeth care</div>
+  </div>
+  <div class="grid-item" data-name="Orthodontist" data-desc="Alignment of teeth and jaws using braces or aligners.">
+    <img src="https://via.placeholder.com/150?text=Orthodontist" alt="">
+    <div class="service-name">Orthodontist</div>
+    <div class="service-short">Teeth alignment</div>
+  </div>
+  <div class="grid-item" data-name="Periodontist" data-desc="Treatment of gum diseases and supporting structures of teeth.">
+    <img src="https://via.placeholder.com/150?text=Periodontist" alt="">
+    <div class="service-name">Periodontist</div>
+    <div class="service-short">Gum care</div>
+  </div>
+  <div class="grid-item" data-name="Oral Surgeon" data-desc="Surgical procedures including tooth extractions and jaw surgery.">
+    <img src="https://via.placeholder.com/150?text=Oral+Surgeon" alt="">
+    <div class="service-name">Oral Surgeon</div>
+    <div class="service-short">Surgery</div>
+  </div>
+  <div class="grid-item" data-name="Pediatric Dentist" data-desc="Dental care specialized for children.">
+    <img src="https://via.placeholder.com/150?text=Pediatric+Dentist" alt="">
+    <div class="service-name">Pediatric Dentist</div>
+    <div class="service-short">Child teeth</div>
+  </div>
+  <div class="grid-item" data-name="Prosthodontist" data-desc="Design and fitting of artificial teeth and implants.">
+    <img src="https://via.placeholder.com/150?text=Prosthodontist" alt="">
+    <div class="service-name">Prosthodontist</div>
+    <div class="service-short">Dental implants</div>
+  </div>
+</div>
+
+<!-- Radiology & Imaging -->
+<h3>Radiology & Imaging</h3>
+<div class="grid">
+  <div class="grid-item" data-name="Radiologist" data-desc="Interpretation of imaging studies including X-rays, CT, and MRI.">
+    <img src="https://via.placeholder.com/150?text=Radiologist" alt="">
+    <div class="service-name">Radiologist</div>
+    <div class="service-short">Imaging care</div>
+  </div>
+  <div class="grid-item" data-name="Interventional Radiologist" data-desc="Minimally invasive procedures guided by imaging.">
+    <img src="https://via.placeholder.com/150?text=Interventional+Radiologist" alt="">
+    <div class="service-name">Interventional Radiologist</div>
+    <div class="service-short">Guided procedures</div>
+  </div>
+  <div class="grid-item" data-name="Ultrasonographer" data-desc="Ultrasound imaging and diagnostics.">
+    <img src="https://via.placeholder.com/150?text=Ultrasonographer" alt="">
+    <div class="service-name">Ultrasonographer</div>
+    <div class="service-short">Ultrasound</div>
+  </div>
+  <div class="grid-item" data-name="CT Scan Specialist" data-desc="Advanced CT imaging interpretation.">
+    <img src="https://via.placeholder.com/150?text=CT+Scan+Specialist" alt="">
+    <div class="service-name">CT Scan Specialist</div>
+    <div class="service-short">CT imaging</div>
+  </div>
+  <div class="grid-item" data-name="MRI Specialist" data-desc="Advanced MRI imaging interpretation.">
+    <img src="https://via.placeholder.com/150?text=MRI+Specialist" alt="">
+    <div class="service-name">MRI Specialist</div>
+    <div class="service-short">MRI imaging</div>
+  </div>
+  <div class="grid-item" data-name="Nuclear Medicine Specialist" data-desc="Diagnosis and treatment using radioactive materials.">
+    <img src="https://via.placeholder.com/150?text=Nuclear+Medicine+Specialist" alt="">
+    <div class="service-name">Nuclear Medicine Specialist</div>
+    <div class="service-short">Radioactive imaging</div>
+  </div>
+</div>
+
+<!-- Physiotherapy & Rehabilitation -->
+<h3>Physiotherapy & Rehabilitation</h3>
+<div class="grid">
+  <div class="grid-item" data-name="Physiotherapist" data-desc="Rehabilitation of movement disorders, injuries, and physical impairments.">
+    <img src="https://via.placeholder.com/150?text=Physiotherapist" alt="">
+    <div class="service-name">Physiotherapist</div>
+    <div class="service-short">Movement rehab</div>
+  </div>
+  <div class="grid-item" data-name="Occupational Therapist" data-desc="Assistance with daily living activities and functional independence.">
+    <img src="https://via.placeholder.com/150?text=Occupational+Therapist" alt="">
+    <div class="service-name">Occupational Therapist</div>
+    <div class="service-short">Daily life rehab</div>
+  </div>
+  <div class="grid-item" data-name="Speech Therapist" data-desc="Therapy for speech, language, and swallowing disorders.">
+    <img src="https://via.placeholder.com/150?text=Speech+Therapist" alt="">
+    <div class="service-name">Speech Therapist</div>
+    <div class="service-short">Speech rehab</div>
+  </div>
+  <div class="grid-item" data-name="Cardiac Rehabilitation Specialist" data-desc="Recovery and rehabilitation after cardiac events.">
+    <img src="https://via.placeholder.com/150?text=Cardiac+Rehab+Specialist" alt="">
+    <div class="service-name">Cardiac Rehab Specialist</div>
+    <div class="service-short">Heart rehab</div>
+  </div>
+  <div class="grid-item" data-name="Neurological Rehabilitation Specialist" data-desc="Recovery and rehabilitation after neurological injuries or diseases.">
+    <img src="https://via.placeholder.com/150?text=Neuro+Rehab+Specialist" alt="">
+    <div class="service-name">Neuro Rehab Specialist</div>
+    <div class="service-short">Neuro rehab</div>
+  </div>
+  <div class="grid-item" data-name="Sports Physiotherapist" data-desc="Treatment and rehabilitation of sports injuries.">
+    <img src="https://via.placeholder.com/150?text=Sports+Physiotherapist" alt="">
+    <div class="service-name">Sports Physiotherapist</div>
+    <div class="service-short">Sports rehab</div>
+  </div>
+</div>
+
+<!-- Emergency & Critical Care -->
+<h3>Emergency & Critical Care</h3>
+<div class="grid">
+  <div class="grid-item" data-name="Emergency Physician" data-desc="Immediate medical care for acute illnesses and injuries.">
+    <img src="https://via.placeholder.com/150?text=Emergency+Physician" alt="">
+    <div class="service-name">Emergency Physician</div>
+    <div class="service-short">Acute care</div>
+  </div>
+  <div class="grid-item" data-name="Intensivist" data-desc="Care of critically ill patients in intensive care units.">
+    <img src="https://via.placeholder.com/150?text=Intensivist" alt="">
+    <div class="service-name">Intensivist</div>
+    <div class="service-short">ICU care</div>
+  </div>
+  <div class="grid-item" data-name="Trauma Surgeon" data-desc="Surgical treatment of severe injuries.">
+    <img src="https://via.placeholder.com/150?text=Trauma+Surgeon" alt="">
+    <div class="service-name">Trauma Surgeon</div>
+    <div class="service-short">Trauma surgery</div>
+  </div>
+  <div class="grid-item" data-name="Critical Care Nurse" data-desc="Specialized nursing care for critically ill patients.">
+    <img src="https://via.placeholder.com/150?text=Critical+Care+Nurse" alt="">
+    <div class="service-name">Critical Care Nurse</div>
+    <div class="service-short">ICU nursing</div>
+  </div>
+  <div class="grid-item" data-name="Paramedic" data-desc="Emergency pre-hospital care and transport.">
+    <img src="https://via.placeholder.com/150?text=Paramedic" alt="">
+    <div class="service-name">Paramedic</div>
+    <div class="service-short">Pre-hospital care</div>
+  </div>
+  <div class="grid-item" data-name="Resuscitation Specialist" data-desc="Advanced life support and resuscitation care.">
+    <img src="https://via.placeholder.com/150?text=Resuscitation+Specialist" alt="">
+    <div class="service-name">Resuscitation Specialist</div>
+    <div class="service-short">Life support</div>
+  </div>
+</div>
+<!-- Counseling Services -->
+<h3>Counseling Services</h3>
+<div class="grid">
+  <div class="grid-item" data-name="Mental Health Counseling" data-desc="Support and therapy for mental health challenges.">
+    <img src="https://via.placeholder.com/150?text=Mental+Health+Counseling" alt="">
+    <div class="service-name">Mental Health Counseling</div>
+    <div class="service-short">Mental support</div>
+  </div>
+  <div class="grid-item" data-name="Marriage & Family Counseling" data-desc="Guidance and therapy for couples and families.">
+    <img src="https://via.placeholder.com/150?text=Marriage+Counseling" alt="">
+    <div class="service-name">Marriage & Family Counseling</div>
+    <div class="service-short">Family support</div>
+  </div>
+  <div class="grid-item" data-name="Substance Abuse Counseling" data-desc="Support for individuals struggling with addiction.">
+    <img src="https://via.placeholder.com/150?text=Substance+Abuse+Counseling" alt="">
+    <div class="service-name">Substance Abuse Counseling</div>
+    <div class="service-short">Addiction support</div>
+  </div>
+  <div class="grid-item" data-name="Career & Academic Counseling" data-desc="Guidance for career choices and academic paths.">
+    <img src="https://via.placeholder.com/150?text=Career+Counseling" alt="">
+    <div class="service-name">Career & Academic Counseling</div>
+    <div class="service-short">Career guidance</div>
+  </div>
+  <div class="grid-item" data-name="Trauma Counseling" data-desc="Support for victims of trauma and stress.">
+    <img src="https://via.placeholder.com/150?text=Trauma+Counseling" alt="">
+    <div class="service-name">Trauma Counseling</div>
+    <div class="service-short">Trauma support</div>
+  </div>
+  <div class="grid-item" data-name="Child & Adolescent Counseling" data-desc="Psychological support for children and teens.">
+    <img src="https://via.placeholder.com/150?text=Child+Counseling" alt="">
+    <div class="service-name">Child & Adolescent Counseling</div>
+    <div class="service-short">Youth support</div>
+  </div>
+</div>
+
+<!-- Rapid Testing Services -->
+<h3>Rapid Testing Services</h3>
+<div class="grid">
+  <div class="grid-item" data-name="HIV Rapid Testing" data-desc="Quick HIV testing with same-day results.">
+    <img src="https://via.placeholder.com/150?text=HIV+Rapid+Testing" alt="">
+    <div class="service-name">HIV Rapid Testing</div>
+    <div class="service-short">HIV check</div>
+  </div>
+  <div class="grid-item" data-name="Malaria Rapid Testing" data-desc="Fast testing for malaria infections.">
+    <img src="https://via.placeholder.com/150?text=Malaria+Rapid+Testing" alt="">
+    <div class="service-name">Malaria Rapid Testing</div>
+    <div class="service-short">Malaria check</div>
+  </div>
+  <div class="grid-item" data-name="COVID-19 Rapid Testing" data-desc="Quick testing for COVID-19 infection.">
+    <img src="https://via.placeholder.com/150?text=COVID19+Rapid+Testing" alt="">
+    <div class="service-name">COVID-19 Rapid Testing</div>
+    <div class="service-short">COVID check</div>
+  </div>
+  <div class="grid-item" data-name="Blood Sugar Rapid Testing" data-desc="Immediate glucose level testing.">
+    <img src="https://via.placeholder.com/150?text=Blood+Sugar+Testing" alt="">
+    <div class="service-name">Blood Sugar Rapid Testing</div>
+    <div class="service-short">Glucose check</div>
+  </div>
+  <div class="grid-item" data-name="Pregnancy Rapid Testing" data-desc="Quick and reliable pregnancy test.">
+    <img src="https://via.placeholder.com/150?text=Pregnancy+Rapid+Testing" alt="">
+    <div class="service-name">Pregnancy Rapid Testing</div>
+    <div class="service-short">Pregnancy check</div>
+  </div>
+  <div class="grid-item" data-name="Hepatitis Rapid Testing" data-desc="Fast testing for hepatitis infections.">
+    <img src="https://via.placeholder.com/150?text=Hepatitis+Rapid+Testing" alt="">
+    <div class="service-name">Hepatitis Rapid Testing</div>
+    <div class="service-short">Hepatitis check</div>
+  </div>
+</div>
+
+<!-- Home-Based Care Services -->
+<h3>Home-Based Care</h3>
+<div class="grid">
+  <div class="grid-item" data-name="Elderly Home Care" data-desc="Medical and personal care for elderly patients at home.">
+    <img src="https://via.placeholder.com/150?text=Elderly+Home+Care" alt="">
+    <div class="service-name">Elderly Home Care</div>
+    <div class="service-short">Elderly support</div>
+  </div>
+  <div class="grid-item" data-name="Post-Surgery Home Care" data-desc="Assistance and monitoring for patients after surgery.">
+    <img src="https://via.placeholder.com/150?text=Post-Surgery+Home+Care" alt="">
+    <div class="service-name">Post-Surgery Home Care</div>
+    <div class="service-short">Recovery support</div>
+  </div>
+  <div class="grid-item" data-name="Chronic Disease Home Care" data-desc="Support for patients with chronic illnesses at home.">
+    <img src="https://via.placeholder.com/150?text=Chronic+Disease+Home+Care" alt="">
+    <div class="service-name">Chronic Disease Home Care</div>
+    <div class="service-short">Chronic support</div>
+  </div>
+  <div class="grid-item" data-name="Palliative Home Care" data-desc="Comfort care for patients with terminal illness.">
+    <img src="https://via.placeholder.com/150?text=Palliative+Home+Care" alt="">
+    <div class="service-name">Palliative Home Care</div>
+    <div class="service-short">Comfort care</div>
+  </div>
+  <div class="grid-item" data-name="Physiotherapy Home Visits" data-desc="Rehabilitation sessions at patients' homes.">
+    <img src="https://via.placeholder.com/150?text=Physio+Home+Visits" alt="">
+    <div class="service-name">Physiotherapy Home Visits</div>
+    <div class="service-short">Home rehab</div>
+  </div>
+  <div class="grid-item" data-name="Nursing Home Visits" data-desc="Registered nurses providing home care services.">
+    <img src="https://via.placeholder.com/150?text=Nursing+Home+Visits" alt="">
+    <div class="service-name">Nursing Home Visits</div>
+    <div class="service-short">Home nursing</div>
+  </div>
+</div>
+
+<!-- Pharmaceutical Services -->
+<h3>Pharmaceutical Services</h3>
+<div class="grid">
+  <div class="grid-item" data-name="Prescription Dispensing" data-desc="Dispensing medications prescribed by doctors.">
+    <img src="https://via.placeholder.com/150?text=Prescription+Dispensing" alt="">
+    <div class="service-name">Prescription Dispensing</div>
+    <div class="service-short">Medication service</div>
+  </div>
+  <div class="grid-item" data-name="Over-the-Counter Medications" data-desc="Providing non-prescription medicines for common ailments.">
+    <img src="https://via.placeholder.com/150?text=OTC+Medications" alt="">
+    <div class="service-name">OTC Medications</div>
+    <div class="service-short">Non-prescription meds</div>
+  </div>
+  <div class="grid-item" data-name="Pharmacist Consultation" data-desc="Advice on proper use of medications and interactions.">
+    <img src="https://via.placeholder.com/150?text=Pharmacist+Consultation" alt="">
+    <div class="service-name">Pharmacist Consultation</div>
+    <div class="service-short">Medication guidance</div>
+  </div>
+  <div class="grid-item" data-name="Compounding Services" data-desc="Custom medication preparation for specific patient needs.">
+    <img src="https://via.placeholder.com/150?text=Compounding+Services" alt="">
+    <div class="service-name">Compounding Services</div>
+    <div class="service-short">Custom meds</div>
+  </div>
+  <div class="grid-item" data-name="Vaccination Services" data-desc="Providing vaccines for children and adults.">
+    <img src="https://via.placeholder.com/150?text=Vaccination+Services" alt="">
+    <div class="service-name">Vaccination Services</div>
+    <div class="service-short">Immunization</div>
+  </div>
+  <div class="grid-item" data-name="Medication Delivery" data-desc="Home delivery of prescribed medications.">
+    <img src="https://via.placeholder.com/150?text=Medication+Delivery" alt="">
+    <div class="service-name">Medication Delivery</div>
+    <div class="service-short">Home meds</div>
+  </div>
+</div>
+<!-- STIs & STDs Services -->
+<h3>STIs & STDs Services</h3>
+<div class="grid">
+  <div class="grid-item" data-name="HIV Counseling & Testing" data-desc="Confidential HIV testing and counseling.">
+    <img src="https://via.placeholder.com/150?text=HIV+Counseling+Testing" alt="">
+    <div class="service-name">HIV Counseling & Testing</div>
+    <div class="service-short">HIV care</div>
+  </div>
+  <div class="grid-item" data-name="Syphilis Testing" data-desc="Testing and treatment for syphilis infection.">
+    <img src="https://via.placeholder.com/150?text=Syphilis+Testing" alt="">
+    <div class="service-name">Syphilis Testing</div>
+    <div class="service-short">Syphilis care</div>
+  </div>
+  <div class="grid-item" data-name="Gonorrhea & Chlamydia Testing" data-desc="Screening and treatment for common bacterial STIs.">
+    <img src="https://via.placeholder.com/150?text=Gonorrhea+Chlamydia" alt="">
+    <div class="service-name">Gonorrhea & Chlamydia Testing</div>
+    <div class="service-short">Bacterial STI care</div>
+  </div>
+  <div class="grid-item" data-name="HPV Screening & Vaccination" data-desc="Screening for HPV and providing preventive vaccines.">
+    <img src="https://via.placeholder.com/150?text=HPV+Screening+Vaccination" alt="">
+    <div class="service-name">HPV Screening & Vaccination</div>
+    <div class="service-short">HPV prevention</div>
+  </div>
+  <div class="grid-item" data-name="Herpes Testing & Counseling" data-desc="Diagnosis and counseling for herpes infections.">
+    <img src="https://via.placeholder.com/150?text=Herpes+Testing" alt="">
+    <div class="service-name">Herpes Testing & Counseling</div>
+    <div class="service-short">Herpes care</div>
+  </div>
+  <div class="grid-item" data-name="Comprehensive STI Treatment" data-desc="Treatment for all common sexually transmitted infections.">
+    <img src="https://via.placeholder.com/150?text=STI+Treatment" alt="">
+    <div class="service-name">Comprehensive STI Treatment</div>
+    <div class="service-short">STI care</div>
+  </div>
+</div>
+
+<!-- Women's Hormone Services -->
+<h3>Women’s Hormone & Reproductive Health</h3>
+<div class="grid">
+  <div class="grid-item" data-name="Hormone Therapy" data-desc="Medical treatment for hormone imbalance in women.">
+    <img src="https://via.placeholder.com/150?text=Hormone+Therapy" alt="">
+    <div class="service-name">Hormone Therapy</div>
+    <div class="service-short">Hormone balance</div>
+  </div>
+  <div class="grid-item" data-name="Menopause Management" data-desc="Support and treatment for women experiencing menopause.">
+    <img src="https://via.placeholder.com/150?text=Menopause+Management" alt="">
+    <div class="service-name">Menopause Management</div>
+    <div class="service-short">Menopause care</div>
+  </div>
+  <div class="grid-item" data-name="PCOS & Endocrine Treatment" data-desc="Diagnosis and treatment for PCOS and other endocrine disorders.">
+    <img src="https://via.placeholder.com/150?text=PCOS+Treatment" alt="">
+    <div class="service-name">PCOS & Endocrine Treatment</div>
+    <div class="service-short">PCOS care</div>
+  </div>
+  <div class="grid-item" data-name="Fertility & Hormonal Counseling" data-desc="Assistance for fertility issues related to hormonal imbalance.">
+    <img src="https://via.placeholder.com/150?text=Fertility+Counseling" alt="">
+    <div class="service-name">Fertility & Hormonal Counseling</div>
+    <div class="service-short">Fertility support</div>
+  </div>
+  <div class="grid-item" data-name="Thyroid Health Management" data-desc="Treatment and monitoring for thyroid hormone disorders in women.">
+    <img src="https://via.placeholder.com/150?text=Thyroid+Health" alt="">
+    <div class="service-name">Thyroid Health Management</div>
+    <div class="service-short">Thyroid care</div>
+  </div>
+  <div class="grid-item" data-name="Menstrual Disorders Treatment" data-desc="Management of irregular periods, heavy bleeding, or hormonal issues.">
+    <img src="https://via.placeholder.com/150?text=Menstrual+Disorders" alt="">
+    <div class="service-name">Menstrual Disorders Treatment</div>
+    <div class="service-short">Period care</div>
+  </div>
+</div>
+
+<!-- Pain Management & Care -->
+<h3>Pain Management & Care</h3>
+<div class="grid">
+
+  <div class="grid-item" data-name="Pain Management Specialist" data-desc="Comprehensive evaluation and treatment of chronic and acute pain conditions.">
+    <img src="https://via.placeholder.com/150?text=Pain+Management+Specialist" alt="">
+    <div class="service-name">Pain Management Specialist</div>
+    <div class="service-short">Pain treatment</div>
+  </div>
+
+  <div class="grid-item" data-name="Anesthesiologist" data-desc="Expert in pain control during and after surgical procedures.">
+    <img src="https://via.placeholder.com/150?text=Anesthesiologist" alt="">
+    <div class="service-name">Anesthesiologist</div>
+    <div class="service-short">Surgical pain</div>
+  </div>
+
+  <div class="grid-item" data-name="Chronic Pain Therapist" data-desc="Specialized therapy for long-term pain management, rehabilitation, and coping strategies.">
+    <img src="https://via.placeholder.com/150?text=Chronic+Pain+Therapist" alt="">
+    <div class="service-name">Chronic Pain Therapist</div>
+    <div class="service-short">Long-term relief</div>
+  </div>
+
+  <div class="grid-item" data-name="Musculoskeletal Pain Specialist" data-desc="Treatment for joint, back, and muscle pain through physical and medical approaches.">
+    <img src="https://via.placeholder.com/150?text=Musculoskeletal+Pain+Specialist" alt="">
+    <div class="service-name">Musculoskeletal Pain Specialist</div>
+    <div class="service-short">Joint & muscle care</div>
+  </div>
+
+  <div class="grid-item" data-name="Neuropathic Pain Specialist" data-desc="Diagnosis and management of nerve-related pain conditions including neuropathy and neuralgia.">
+    <img src="https://via.placeholder.com/150?text=Neuropathic+Pain+Specialist" alt="">
+    <div class="service-name">Neuropathic Pain Specialist</div>
+    <div class="service-short">Nerve pain</div>
+  </div>
+
+  <div class="grid-item" data-name="Palliative Pain Care" data-desc="Pain relief and comfort care for patients with life-limiting or chronic illnesses.">
+    <img src="https://via.placeholder.com/150?text=Palliative+Pain+Care" alt="">
+    <div class="service-name">Palliative Pain Care</div>
+    <div class="service-short">Comfort relief</div>
+  </div>
+</div>
+
+<!-- Rehabilitation & Recovery Care -->
+<h3>Rehabilitation & Recovery Care</h3>
+<div class="grid">
+
+  <div class="grid-item" data-name="Post-Surgical Rehabilitation" data-desc="Specialized recovery programs designed to restore strength and mobility after surgery.">
+    <img src="https://via.placeholder.com/150?text=Post-Surgical+Rehabilitation" alt="">
+    <div class="service-name">Post-Surgical Rehabilitation</div>
+    <div class="service-short">Post-surgery recovery</div>
+  </div>
+
+  <div class="grid-item" data-name="Neurological Rehabilitation" data-desc="Therapies aimed at improving function after brain or spinal injuries.">
+    <img src="https://via.placeholder.com/150?text=Neurological+Rehabilitation" alt="">
+    <div class="service-name">Neurological Rehabilitation</div>
+    <div class="service-short">Brain & nerve recovery</div>
+  </div>
+
+  <div class="grid-item" data-name="Cardiac Rehabilitation" data-desc="Guided recovery plans for patients after heart surgery or cardiac conditions.">
+    <img src="https://via.placeholder.com/150?text=Cardiac+Rehabilitation" alt="">
+    <div class="service-name">Cardiac Rehabilitation</div>
+    <div class="service-short">Heart recovery</div>
+  </div>
+
+  <div class="grid-item" data-name="Orthopedic Recovery" data-desc="Therapeutic care for fractures, joint replacements, and musculoskeletal injuries.">
+    <img src="https://via.placeholder.com/150?text=Orthopedic+Recovery" alt="">
+    <div class="service-name">Orthopedic Recovery</div>
+    <div class="service-short">Bone & joint rehab</div>
+  </div>
+
+  <div class="grid-item" data-name="Sports Injury Rehabilitation" data-desc="Comprehensive rehab programs for athletes and individuals recovering from sports injuries.">
+    <img src="https://via.placeholder.com/150?text=Sports+Rehabilitation" alt="">
+    <div class="service-name">Sports Injury Rehabilitation</div>
+    <div class="service-short">Sports recovery</div>
+  </div>
+
+  <div class="grid-item" data-name="Occupational Recovery Therapy" data-desc="Support to help patients regain independence in daily and work-related tasks.">
+    <img src="https://via.placeholder.com/150?text=Occupational+Recovery" alt="">
+    <div class="service-name">Occupational Recovery Therapy</div>
+    <div class="service-short">Functional recovery</div>
+  </div>
+</div>
+
+<!-- Nutrition & Dietary Services -->
+<h3>Nutrition & Dietary Services</h3>
+<div class="grid">
+
+  <div class="grid-item" data-name="Clinical Nutritionist" data-desc="Customized nutrition plans to manage medical conditions such as diabetes, hypertension, and obesity.">
+    <img src="https://via.placeholder.com/150?text=Clinical+Nutritionist" alt="">
+    <div class="service-name">Clinical Nutritionist</div>
+    <div class="service-short">Medical diets</div>
+  </div>
+
+  <div class="grid-item" data-name="Dietitian Consultation" data-desc="Personalized diet advice for improved health, wellness, and weight management.">
+    <img src="https://via.placeholder.com/150?text=Dietitian+Consultation" alt="">
+    <div class="service-name">Dietitian Consultation</div>
+    <div class="service-short">Diet planning</div>
+  </div>
+
+  <div class="grid-item" data-name="Therapeutic Meal Planning" data-desc="Development of specialized meal plans for patients undergoing treatment or recovery.">
+    <img src="https://via.placeholder.com/150?text=Therapeutic+Meal+Planning" alt="">
+    <div class="service-name">Therapeutic Meal Planning</div>
+    <div class="service-short">Healing diets</div>
+  </div>
+
+  <div class="grid-item" data-name="Weight Management Program" data-desc="Professional guidance for weight loss, muscle gain, and metabolic balance.">
+    <img src="https://via.placeholder.com/150?text=Weight+Management" alt="">
+    <div class="service-name">Weight Management Program</div>
+    <div class="service-short">Healthy weight</div>
+  </div>
+
+  <div class="grid-item" data-name="Pediatric Nutrition" data-desc="Nutritional assessment and diet planning for infants, children, and adolescents.">
+    <img src="https://via.placeholder.com/150?text=Pediatric+Nutrition" alt="">
+    <div class="service-name">Pediatric Nutrition</div>
+    <div class="service-short">Child nutrition</div>
+  </div>
+
+  <div class="grid-item" data-name="Community & Preventive Nutrition" data-desc="Programs to promote healthy eating habits and prevent diet-related illnesses in the community.">
+    <img src="https://via.placeholder.com/150?text=Community+Nutrition" alt="">
+    <div class="service-name">Community & Preventive Nutrition</div>
+    <div class="service-short">Public wellness</div>
+  </div>
+  </div>
+
+</section>
+
+  </div>
+</section>
+
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <span class="close" id="closeModal">&times;</span>
+    <h3 id="modalTitle">Service Name</h3>
+    <p id="modalDesc">Service description goes here...</p>
+    <a href="booking.html" class="book-btn">Book this Service</a>
+  </div>
+</div>
+
+<section class="location-section">
+  <h2>Our Location</h2>
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18..." allowfullscreen="" loading="lazy"></iframe>
+  <div class="external-links">
+    <a href="https://www.moh.gov.zm/" target="_blank">MOH Zambia</a>
+    <a href="https://www.hpcz.org.zm/" target="_blank">HPCZ</a>
+    <a href="https://www.who.int/" target="_blank">WHO</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-left location"><i class="fa fa-location-dot"></i> Lusaka, Zambia</div>
+  <div class="footer-right socials">
+    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+    <a href="#"><i class="fab fa-linkedin"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+  </div>
+  <div class="copyright">&copy; 2025 Nalisa Medical Solutions</div>
+</footer>
+
+<script>
+  // Modal Logic
+  const modal = document.getElementById('modal');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalDesc = document.getElementById('modalDesc');
+  const closeModal = document.getElementById('closeModal');
+
+  const gridItems = document.querySelectorAll('.grid-item');
+
+  // Function to open modal
+  function openModal(item) {
+    modalTitle.textContent = item.dataset.name;
+    modalDesc.textContent = item.dataset.desc;
+    modal.style.display = 'flex';
+  }
+
+  // Add click event to each grid item
+  gridItems.forEach(item => {
+    item.addEventListener('click', () => openModal(item));
+  });
+
+  // Close modal
+  closeModal.addEventListener('click', () => modal.style.display = 'none');
+  window.addEventListener('click', e => { 
+    if(e.target == modal) modal.style.display='none'; 
+  });
+
+  // Search Logic
+  const searchInput = document.getElementById('searchInput');
+
+  searchInput.addEventListener('input', () => {
+    const query = searchInput.value.toLowerCase();
+
+    gridItems.forEach(item => {
+      const name = item.dataset.name.toLowerCase();
+      const desc = item.dataset.desc.toLowerCase();
+      
+      if(name.includes(query) || desc.includes(query)) {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  });
+</script>
+
+
+</body>
+</html>
